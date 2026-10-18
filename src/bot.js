@@ -300,15 +300,9 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
-// Bold the first line of LLM output, escape the rest
+// Посты без заголовка: просто экранируем текст, абзацы сохраняются как есть
 function formatLlmText(text) {
-  const nlIdx = text.indexOf('\n');
-  if (nlIdx === -1) return escapeHtml(text);
-  const title = text.slice(0, nlIdx).trim();
-  const body  = text.slice(nlIdx + 1).trim();
-  return body
-    ? `<b>${escapeHtml(title)}</b>\n\n${escapeHtml(body)}`
-    : `<b>${escapeHtml(title)}</b>`;
+  return escapeHtml(text.trim());
 }
 
 function clearButtons(chatId, messageId) {

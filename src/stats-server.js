@@ -26,7 +26,7 @@ function saveAds(ads) {
 async function runAiAnalysis(ads, channelMembers) {
   const { request: httpsReq } = await import('https');
   const baseUrl = (process.env.OPENAI_API_BASE ?? 'https://api.openai.com/v1').replace(/\/$/, '');
-  const model   = process.env.LLM_MODEL ?? 'gpt-4o';
+  const model   = process.env.LLM_MODEL ?? 'gpt-6.1-sol';
 
   const adsText = ads.length === 0
     ? 'Данных о рекламных размещениях пока нет.'
@@ -41,7 +41,7 @@ async function runAiAnalysis(ads, channelMembers) {
 
   const prompt = `Ты — аналитик по продвижению Telegram-каналов. Анализируй рекламные кампании канала и давай конкретные рекомендации.
 
-Канал: @mrmld_hrc (тематика: HoReCa, общепит, ритейл, рестораны)
+Канал: @mrmld_hrc (массовый канал: новинки, магазины, еда, курьёзы из ритейла)
 Текущие подписчики: ${channelMembers ?? 'неизвестно'}
 
 Данные о рекламных размещениях:
@@ -70,8 +70,8 @@ ${adsText}
     const bodyStr = JSON.stringify({
       model,
       messages: [{ role: 'user', content: prompt }],
-      temperature: 0.7,
-      max_completion_tokens: 2000,
+      reasoning_effort: process.env.LLM_REASONING_EFFORT ?? 'low',
+      max_completion_tokens: 6000,
     });
 
     const options = {
