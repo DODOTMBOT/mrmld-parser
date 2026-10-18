@@ -1,0 +1,16 @@
+{
+  "name": "mrmld-parser",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "News parser for Aperitiv Telegram channel",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.0.0",
+    "telegram": "^2.25.15",
+    "undici": "^6.0.0"
+  }
+}

@@ -1,0 +1,4 @@
+node_modules/
+parser-data/
+.env
+*.log
